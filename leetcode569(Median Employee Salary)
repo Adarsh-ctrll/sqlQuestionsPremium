@@ -1,0 +1,34 @@
+--Table Schema-- (use DB Fiddle Online compiler)
+CREATE TABLE Employee (
+    Id INT PRIMARY KEY,
+    Company VARCHAR(10),
+    Salary INT
+);
+
+INSERT INTO Employee (Id, Company, Salary) VALUES
+(1, 'A', 2341),
+(2, 'A', 341),
+(3, 'A', 15),
+(4, 'A', 15314),
+(5, 'A', 451),
+(6, 'A', 513),
+(7, 'B', 15),
+(8, 'B', 13),
+(9, 'B', 1154),
+(10, 'B', 1345),
+(11, 'B', 1221),
+(12, 'B', 234),
+(13, 'C', 2345),
+(14, 'C', 2645),
+(15, 'C', 2645),
+(16, 'C', 2652),
+(17, 'C', 65);
+
+--Soln--
+with cte as(select *,row_number() over(partition by company order by salary) as rnk,
+count(id) over(partition by company) as n
+from Employee)
+
+select id,company,salary
+from cte
+where rnk between (n+1)/2 and (n+2)/2
