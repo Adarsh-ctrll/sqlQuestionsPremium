@@ -1,4 +1,4 @@
-# LeetCode SQL Practice mostly for Premium or conceptual tougher problems
+# LeetCode SQL Schemas Practice mostly for Premium or conceptual tougher problems
 
 This repository contains my solutions, schemas, sample data, and notes for LeetCode SQL problems.
 I made this for my reference but you can you  if find helpful. 
