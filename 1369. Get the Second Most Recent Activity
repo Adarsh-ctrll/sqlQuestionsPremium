@@ -1,0 +1,25 @@
+CREATE TABLE UserActivity (
+    username VARCHAR(50),
+    activity VARCHAR(100),
+    startDate DATE,
+    endDate DATE
+);
+
+INSERT INTO UserActivity (username, activity, startDate, endDate) VALUES
+('Alice', 'Travel', '2020-02-12', '2020-02-20'),
+('Alice', 'Dancing', '2020-02-21', '2020-02-23'),
+('Alice', 'Travel', '2020-02-24', '2020-02-28'),
+('Bob', 'Travel', '2020-02-11', '2020-02-18');
+
+==soln==
+
+with cte as(select distinct *
+from  UserActivity),
+
+cte2 as(
+  select *,row_number()over(partition by username order by endDate desc) as rnk,
+  count(activity) over( partition by userName) as cnt 
+from cte)
+
+select * from cte2
+where rnk=2 or cnt=1
