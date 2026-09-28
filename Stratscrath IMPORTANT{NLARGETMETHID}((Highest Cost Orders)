@@ -1,0 +1,8 @@
+# Import your libraries
+import pandas as pd
+import datetime as dt
+# Start writing code
+customers.head()
+df=pd.merge(orders,customers,left_on='cust_id',right_on='id',how='left')
+df['order_date']=df['order_date'].dt.strftime('%Y-%m-%d')
+df.groupby(['first_name','order_date'])['total_order_cost'].sum().reset_index().nlargest(1,'total_order_cost',keep='all')
