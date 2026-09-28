@@ -1,0 +1,10 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+customers.head()
+orders.head()
+merged_df=pd.merge(customers,orders,left_on='id',right_on='cust_id',how='left')
+merged_df.head(5)
+final_df=merged_df[['first_name','last_name','city','order_details']]
+final_df.sort_values(by=['first_name','order_details'])
