@@ -1,0 +1,20 @@
+import pandas as pd
+import numpy as np
+
+df = sf_restaurant_health_violations[['business_name']].drop_duplicates()
+
+df['business_type'] = np.where(
+    df['business_name'].str.lower().str.contains('restaurant', na=False),
+    'restaurant',
+    np.where(
+        df['business_name'].str.lower().str.contains('school', na=False),
+        'school',
+        np.where(
+            df['business_name'].str.lower().str.contains(r'cafe|coffee', na=False),
+            'cafe',
+            'other'
+        )
+    )
+)
+
+df
