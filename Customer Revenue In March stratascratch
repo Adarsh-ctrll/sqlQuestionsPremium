@@ -1,0 +1,7 @@
+# Import your libraries
+import pandas as pd
+import datetime as dt
+
+# Start writing code
+orders['order_date']=orders['order_date'].dt.strftime('%Y-%m-%d')
+orders[orders['order_date'].between('2019-03-01','2019-03-31')].groupby('cust_id')['total_order_cost'].sum().reset_index().rename(columns={'total_order_cost':'revenue'}).sort_values(by='revenue',ascending=False)
