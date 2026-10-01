@@ -1,0 +1,13 @@
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+yelp_business.head()
+# top 5 states with most 5 start bsuinesses
+# df = yelp_business.groupby(['state', 'stars']).size().reset_index(name='count').sort_values(by='count',ascending=False)
+# df=df.drop_duplicates()
+# df[df['stars']==5].nlargest(5,'count')
+
+yelp_business[yelp_business['stars']==5].groupby('state')['business_id'].count().reset_index().rename(columns={'business_id':'n_businesses'}).sort_values(by=['n_businesses','state'],ascending=[False,True]).nlargest(5,'n_businesses',keep='all')
+
+keep='first'/keep='last'/keep='all'
